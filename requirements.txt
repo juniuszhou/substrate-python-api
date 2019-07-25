@@ -1,4 +1,6 @@
 requests
 asyncio
 websockets
-
+xxhash
+pyblake2
+websocket-client
