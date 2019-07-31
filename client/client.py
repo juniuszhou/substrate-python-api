@@ -3,6 +3,7 @@ from websocket import create_connection
 import json
 import time
 
+
 class WSClient():
     subscriptions = dict()
     connection = None

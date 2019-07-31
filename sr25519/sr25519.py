@@ -1,20 +1,18 @@
 from ctypes import *
 import ctypes
-import random
+from .types import PrivateKey, PublicKey, Address
 
 so_path = '/home/junius/code/src/github.com/juniuszhou/sr25519-crust/build/release/libsr25519crust.so'
-dummy_keypair = b"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-dummy_public_key = b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-dummy_signature = b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
 
-# SR25519_CHAINCODE_SIZE 32
-# SR25519_KEYPAIR_SIZE 96
-# SR25519_PUBLIC_SIZE 32
-# SR25519_SECRET_SIZE 64
-# SR25519_SEED_SIZE 32
-# SR25519_SIGNATURE_SIZE 64
-# SR25519_VRF_OUTPUT_SIZE 32
-# SR25519_VRF_PROOF_SIZE 64
+SR25519_CHAINCODE_SIZE = 32
+SR25519_KEYPAIR_SIZE = 96
+SR25519_PUBLIC_SIZE = 32
+SR25519_SECRET_SIZE = 64
+SR25519_SEED_SIZE = 32
+SR25519_SIGNATURE_SIZE = 64
+SR25519_VRF_OUTPUT_SIZE = 32
+SR25519_VRF_PROOF_SIZE = 64
+
 
 class Sr25519:
     def __init__(self):
@@ -28,7 +26,7 @@ class Sr25519:
     #  */
     def sr25519_derive_keypair_hard(self, key_pair, chain_code):
         output = ctypes.c_char_p()
-        output.value = dummy_keypair
+        output.value = b'0' * SR25519_KEYPAIR_SIZE
         self.lib.sr25519_derive_keypair_hard(output, key_pair, chain_code)
         return output.value
 
@@ -40,7 +38,7 @@ class Sr25519:
     #  */
     def sr25519_derive_keypair_soft(self, key_pair, chain_code):
         output = ctypes.c_char_p()
-        output.value = dummy_keypair
+        output.value = b'0' * SR25519_KEYPAIR_SIZE
         self.lib.sr25519_derive_keypair_soft(output, key_pair, chain_code)
         return output.value
 
@@ -51,21 +49,21 @@ class Sr25519:
     #  *  cc_ptr: chaincode - input buffer of SR25519_CHAINCODE_SIZE bytes
     #  */
     def sr25519_derive_public_soft(self, key_pair, chain_code):
-            output = ctypes.c_char_p()
-            output.value = dummy_public_key
-            self.lib.sr25519_derive_public_soft(output, key_pair, chain_code)
-            return output.value
+        output = ctypes.c_char_p()
+        output.value = b'0' * SR25519_KEYPAIR_SIZE
+        self.lib.sr25519_derive_public_soft(output, key_pair, chain_code)
+        return output.value
 
     # /**
     #  * Generate a key pair.
-    #  *  keypair_out: keypair [32b key | 32b nonce | 32b public], pre-allocated output buffer of SR25519_KEYPAIR_SIZE bytes
+    #  *  keypair_out: keypair [32b key | 32b nonce | 32b public], output buffer of SR25519_KEYPAIR_SIZE bytes
     #  *  seed: generation seed - input buffer of SR25519_SEED_SIZE bytes
     #  */
     def sr25519_keypair_from_seed(self, seed):
         output = ctypes.c_char_p()
-        output.value = dummy_keypair
+        output.value = b'0' * SR25519_KEYPAIR_SIZE
         self.lib.sr25519_keypair_from_seed(output, seed)
-        return output.value
+        return PrivateKey(output.value[:32]), PublicKey(output.value[:64])
 
     # /**
     #  * Sign a message
@@ -79,7 +77,7 @@ class Sr25519:
     #  */
     def sr25519_sign(self, public_key, private_key, message, message_length):
         output = ctypes.c_char_p()
-        output.value = dummy_signature
+        output.value = b'0' * SR25519_KEYPAIR_SIZE
         self.lib.sr25519_sign(output, private_key, message, message_length)
         return output.value
 
@@ -92,7 +90,7 @@ class Sr25519:
     #  *  returned true if signature is valid, false otherwise
     #  */
     def sr25519_verify(self, signature, message, message_length, public_key):
-        result = self.lib.sr25519_sign(signature, message, message_length, public_key)
+        result = self.lib.sr25519_verify(signature, message, message_length, public_key)
         return result
 
     # /**
@@ -103,28 +101,21 @@ class Sr25519:
     #  * @param message_ptr byte array to be signed
     #  * @param limit_ptr byte array, must be 32 bytes long
     #  */
-    def sr25519_vrf_sign_if_less(self, keypair, message, message_length, limit):
+    def sr25519_vrf_sign_if_less(self, keypair, message, limit):
         output = ctypes.c_char_p()
-        output.value = dummy_public_key
-        self.lib.sr25519_vrf_sign_if_less(output, keypair, message, message_length, limit)
+        output.value = b'0' * SR25519_KEYPAIR_SIZE
+        self.lib.sr25519_vrf_sign_if_less(output, keypair, message, limit)
         return output.value
 
     # /**
     #  * Verify a signature produced by a VRF with its original input and the corresponding proof
     #  * @param public_key_ptr byte representation of the public key that was used to sign the message
-    #  * @param message_ptr the orignal signed message
+    #  * @param message_ptr the original signed message
     #  * @param output_ptr the signature
     #  * @param proof_ptr the proof of the signature
     #  */
-    def sr25519_vrf_verify(const uint8_t *public_key_ptr,
-                                          const uint8_t *message_ptr,
-                                          unsigned long message_length,
-                                          const uint8_t *output_ptr,
-                                          const uint8_t *proof_ptr)
+    def sr25519_vrf_verify(self, public_key, message, message_length, signature_output, proof):
         output = ctypes.c_char_p()
-        output.value = dummy_public_key
-        self.lib.sr25519_vrf_sign_if_less(output, keypair, message, message_length, limit)
+        output.value = b'0' * SR25519_KEYPAIR_SIZE
+        self.lib.sr25519_vrf_verify(public_key, message, message_length, signature_output, proof)
         return output.value
-
-
-

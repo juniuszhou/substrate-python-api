@@ -2,7 +2,7 @@ import asyncio
 import websockets
 import json
 from ethereum.utils import decode_hex
-from polkadot.metadata.lib import decode_v5
+from metadata.lib import decode_v5
 
 # ws_uri = "wss://poc3-rpc.polkadot.io/"
 # ws_uri = "wss://substrate-rpc.parity.io/"
