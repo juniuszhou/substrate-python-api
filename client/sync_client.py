@@ -9,9 +9,10 @@ def start_loop(loop):
 
 
 def more_work(x):
-    print('More work {}'.format(x))
-    time.sleep(x)
-    print('Finished more work {}'.format(x))
+    while True:
+        print('More work {}'.format(x))
+        time.sleep(x)
+        print('Finished more work {}'.format(x))
 
 
 new_loop = asyncio.new_event_loop()
@@ -20,6 +21,11 @@ t.start()
 
 print('started.')
 
-new_loop.call_soon_threadsafe(more_work, 6)
-new_loop.call_soon_threadsafe(more_work, 3)
+new_loop.call_soon_threadsafe(more_work, 2)
 
+new_loop2 = asyncio.new_event_loop()
+t2 = Thread(target=start_loop, args=(new_loop2,))
+t2.start()
+new_loop2.call_soon_threadsafe(more_work, 1)
+
+print('over.')
