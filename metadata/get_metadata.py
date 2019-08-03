@@ -2,13 +2,14 @@ import asyncio
 import websockets
 import json
 from ethereum.utils import decode_hex
-from metadata.lib import decode_v5
+from metadata.decode import decode_metadata
 
 # ws_uri = "wss://poc3-rpc.polkadot.io/"
 # ws_uri = "wss://substrate-rpc.parity.io/"
 # ws_uri = "ws://45.76.157.229:9944/"
 
-ws_uri = 'ws://192.168.2.158:9944/'
+# ws_uri = 'ws://192.168.2.158:9944/'
+ws_uri = 'ws://127.0.0.1:9944/'
 
 
 def async_call(command, params=[]):
@@ -25,7 +26,7 @@ def async_call(command, params=[]):
             print(result)
             print(result[0], result[1], result[2])
             print(decode_hex(result))
-            decode_v5(result[2:])
+            decode_metadata(result[2:])
             # print(bytearray.fromhex(result).decode())
 
     asyncio.get_event_loop().run_until_complete(hello(ws_uri))

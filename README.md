@@ -13,4 +13,5 @@ https://github.com/Warchant/sr25519-crust
 # google doc for web3.
 https://docs.google.com/document/d/1l2nkWiMLw3zl_WJ4BQHkC2n_hzQqoNybisrLwwtlI8c/edit
 
-#
+# useful post about rpc and codec.
+https://www.shawntabrizi.com/substrate/querying-substrate-storage-via-rpc/

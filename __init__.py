@@ -2,12 +2,12 @@ r"""Description Here.
 """
 __version__ = '0.0.1'
 __all__ = [
-    'Client', 'init'
+    'WSClient', 'init'
 ]
 
-__author__ = 'Bob Ippolito <bob@redivi.com>'
+__author__ = 'Junius zhou <junius.zhou@gmail.com>'
 
-from .rpc_client import Client
+from client.client import WSClient
 
 
 def init():

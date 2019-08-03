@@ -46,6 +46,24 @@ class ModuleV5:
         self.event = []  # EventArgV5
 
 
+class ModuleV6:
+    def __init__(self):
+        self.name = ''
+        self.prefix = ''
+        self.storage = []  # StorageV5
+        self.call = []  # CallV5
+        self.event = []  # EventArgV5
+        self.const = []
+
+
+class ConstV6:
+    def __init__(self):
+        self.name = ''
+        self.type = ''  # FunctionCallArgV5
+        self.value = ''
+        self.doc = []  # string
+
+
 class MetadataV5:
     def __init__(self):
         self.module = []  # ModuleV5

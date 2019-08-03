@@ -1,4 +1,4 @@
-from metadata.algorithm import decode_compact_integer, next_byte, hex_to_string
+from metadata.common_algo import decode_compact_integer, next_byte, hex_to_string
 from metadata.metadata_types import StorageV5, EventArgV5, FuncTypeV5, CallV5, FunctionCallArgV5
 
 
@@ -71,6 +71,27 @@ def get_call_v5(data):
 
 
 def get_event_v5(data):
+    event = EventArgV5()
+    event_name_len, data = decode_compact_integer(data)
+    event.name, data = hex_to_string(data[:event_name_len * 2]), data[event_name_len * 2:]
+
+    arg_number, data = decode_compact_integer(data)
+    for _ in range(0, arg_number):
+
+        arg_name_len, data = decode_compact_integer(data)
+        arg, data = hex_to_string(data[:arg_name_len * 2]), data[arg_name_len * 2:]
+        event.args.append(arg)
+
+    doc_number, data = decode_compact_integer(data)
+    for _ in range(0, doc_number):
+        doc_name_len, data = decode_compact_integer(data)
+        doc, data = hex_to_string(data[:doc_name_len * 2]), data[doc_name_len * 2:]
+        event.doc.append(doc)
+
+    return event, data
+
+
+def get_const_v5(data):
     event = EventArgV5()
     event_name_len, data = decode_compact_integer(data)
     event.name, data = hex_to_string(data[:event_name_len * 2]), data[event_name_len * 2:]

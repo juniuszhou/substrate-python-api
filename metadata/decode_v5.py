@@ -1,6 +1,6 @@
-from polkadot.metadata.algorithm import next_byte, decode_compact_integer, hex_to_string
-from polkadot.metadata.V5 import get_storage_v5, get_call_v5, get_event_v5
-from polkadot.metadata.metadata_types import ModuleV5
+from metadata.common_algo import next_byte, decode_compact_integer, hex_to_string
+from metadata.V5 import get_storage_v5, get_call_v5, get_event_v5
+from metadata.metadata_types import ModuleV5
 
 
 def decode_v5(data):
