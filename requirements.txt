@@ -4,4 +4,7 @@ websockets
 xxhash
 pyblake2
 websocket-client
-ethereum
+base58
+codecs
+
+
