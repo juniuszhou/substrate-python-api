@@ -1,4 +1,4 @@
-from polkadot.ws.config import async_call
+from tests.config import async_call
 
 
 commands = [

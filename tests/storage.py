@@ -2,6 +2,7 @@ import asyncio
 import websockets
 import json
 
+
 messages = [{"jsonrpc": "2.0", "method": "state_getStorageHash", "params": ["0x00"], "id": 1},
     {"jsonrpc": "2.0", "method": "state_getStorageSize", "params": ["0x00"], "id": 1},
 ]

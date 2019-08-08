@@ -48,6 +48,15 @@ def public_to_address(public_key):
         public_key = public_key[2:]
     return base58.b58encode(b'*' + codecs.decode(public_key, 'hex') + b'>\xa5')
 
+
+def address_to_public(address):
+    # 5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY
+    result = base58.b58decode(b'5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY')
+    print(result[1:33])
+
+
+address_to_public(1)
+
 # nani-3:substrate junius$ target/release/subkey generate
 # Secret phrase `twenty warrior visit sword rose rely peace cash absent safe roof budget` is account:
 #   Secret seed: 0xf524574cf9425c882105e2c04f9ba7c24d4527b1dec8f2a689f276d7c56cecc6

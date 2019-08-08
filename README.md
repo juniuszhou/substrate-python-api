@@ -15,3 +15,6 @@ https://docs.google.com/document/d/1l2nkWiMLw3zl_WJ4BQHkC2n_hzQqoNybisrLwwtlI8c/
 
 # useful post about rpc and codec.
 https://www.shawntabrizi.com/substrate/querying-substrate-storage-via-rpc/
+
+https://github.com/shawntabrizi/substrate-rpc-examples
+

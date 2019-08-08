@@ -6,7 +6,7 @@ import json
 # ws_uri = "wss://substrate-rpc.parity.io/"
 # ws_uri = "ws://45.76.157.229:9944/"
 
-ws_uri = 'ws://192.168.2.158:9944/'
+ws_uri = 'ws://192.168.1.224:9944/'
 
 
 def async_call(command, params=[]):
@@ -17,6 +17,7 @@ def async_call(command, params=[]):
             message["id"] = 1
             message["params"] = params
             message["method"] = command
+            print(json.dumps(message))
             await websocket.send(json.dumps(message))
             data = await websocket.recv()
             print(data)
