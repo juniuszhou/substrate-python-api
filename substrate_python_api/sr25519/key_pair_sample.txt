@@ -1,0 +1,18 @@
+## now subkey support polkadot kusama and substrate address format.
+
+nani-3:substrate junius$  target/release/subkey --network polkadot generate
+Secret phrase `thrive ketchup chaos trap proud add nephew shiver skate frozen actress clutch` is account:
+  Secret seed: 0xa501530c17f11be03dad101e8a310fc4f52b60011352b3cb7a8b1e6c71485e23
+  Public key (hex): 0x1c62f380b1e203b102f355dfd2d044ea2a0d9924fdd6f0f6312b41129751ad6a
+  Address (SS58): 1eDjevs6yWQKgKgcLHJEaXuBgG4LVnJ1z5SGEZKmGtexJhR
+nani-3:substrate junius$  target/release/subkey --network kusama generate
+Secret phrase `lazy mix poverty panther away alarm book measure question hire wet language` is account:
+  Secret seed: 0xfe559c9ae4815f69b311b20fb022d534f547b64ba1863ef2952b6f8fe74a9257
+  Public key (hex): 0x40ba6d2a1a594c12bcf5521431f34cf37607a6e6321abd8e4713de9b4dcdb33b
+  Address (SS58): E3BxnWmbQBkk8XG592ap8WgUiaZK2bJGe3fe3CKxMzBsyd3
+nani-3:substrate junius$  target/release/subkey --network substrate generate
+Secret phrase `height wreck vicious student atom model sell tooth comfort grab buddy among` is account:
+  Secret seed: 0xf0259214683389eef511a08c970cbcd5c692e39a959f9cd31bb5103468a33062
+  Public key (hex): 0xc05156ae80cb4960f8fff4c05b514d9337b2b56e4d6f6b3f8d7204df73c32862
+  Address (SS58): 5GQsDLvQCrFVLbCQdwPWpT6QsGRohhjrHFs6Uk3WdjvoW6of
+
