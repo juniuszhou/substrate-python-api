@@ -89,3 +89,8 @@ def encode_example():
     print(bytearray.hex(bytes_array))
     print(bytes(u8_list))
 
+
+def encode_u64_bytes(data):
+    return data.to_bytes(8, 'big')
+
+

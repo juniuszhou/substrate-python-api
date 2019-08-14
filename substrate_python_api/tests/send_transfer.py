@@ -1,8 +1,6 @@
-from tests.config import async_call
-import json
-from utils.blake2 import get_blake2_256
+from substrate_python_api.tests.config import async_call
 import base58
-from utils.codec import encode_compact_integer, decode_compact_integer, int_to_byte
+from substrate_python_api.utils.codec import encode_compact_integer
 
 balances_module_index = 5
 transfer_method_index = 0
@@ -28,14 +26,15 @@ class Extra:
         self.weight = weight
         self.fee = fee
 
-    def build_extra(self): # 0, 4, 145, 1
+    def build_extra(self):  # 0, 4, 145, 1
         # just one byte, byteorder could be little and big.
         era = self.era.to_bytes(1, byteorder='little')
         nonce = encode_compact_integer(self.nonce)
         weight = self.weight.to_bytes(1, byteorder='little')
         fee = self.fee.to_bytes(1, byteorder='little')
         print(era, nonce, weight, fee)
-        return era + nonce + weight + fee
+        # return era + nonce + weight + fee
+        return era + nonce + fee
 
 
 class TransferExtrinsic:
@@ -90,10 +89,10 @@ def deal_with_message(data):
 
 
 tx = TransferExtrinsic(2, 1)
-print(tx.build_tx())
+# print(tx.build_tx())
 
 # data = [41, 2, 130, 255, 48, 100, 193, 176, 231, 2, 44, 71, 100, 223, 13, 233, 226, 216, 238, 23, 128, 72, 196, 14, 60, 177, 152, 59, 104, 182, 55, 167, 209, 143, 22, 96, 24, 84, 229, 197, 112, 142, 183, 91, 38, 224, 184, 23, 132, 171, 228, 230, 122, 140, 192, 38, 154, 239, 161, 159, 156, 55, 0, 18, 221, 172, 17, 107, 218, 135, 4, 0, 105, 194, 60, 244, 220, 111, 61, 33, 110, 54, 90, 49, 54, 190, 144, 84, 111, 50, 164, 195, 72, 173, 197, 42, 38, 223, 92, 6, 0, 4, 145, 1, 5, 0, 255, 48, 100, 193, 176, 231, 2, 44, 71, 100, 223, 13, 233, 226, 216, 238, 23, 128, 72, 196, 14, 60, 177, 152, 59, 104, 182, 55, 167, 209, 143, 22, 96, 4]
 
-data = '0x290282ff3064c1b0e7022c4764df0de9e2d8ee178048c40e3cb1983b68b637a7d18f16601854e5c5708eb75b26e0b81784abe4e67a8cc0269aefa19f9c370012ddac116bda87040069c23cf4dc6f3d216e365a3136be90546f32a4c348adc52a26df5c06000491010500ff3064c1b0e7022c4764df0de9e2d8ee178048c40e3cb1983b68b637a7d18f166004'
+# data = '0x290282ff3064c1b0e7022c4764df0de9e2d8ee178048c40e3cb1983b68b637a7d18f16601854e5c5708eb75b26e0b81784abe4e67a8cc0269aefa19f9c370012ddac116bda87040069c23cf4dc6f3d216e365a3136be90546f32a4c348adc52a26df5c06000491010500ff3064c1b0e7022c4764df0de9e2d8ee178048c40e3cb1983b68b637a7d18f166004'
 async_call("author_submitExtrinsic", [tx.build_tx()], deal_with_message)
 # async_call("author_submitExtrinsic", [data,], deal_with_message)

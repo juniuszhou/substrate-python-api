@@ -3,7 +3,6 @@ import websockets
 import json
 
 from substrate_python_api.utils.xxHash import get_xxhash_128
-from substrate_python_api.utils.codec import encode_compact_integer
 
 
 def send_hash():

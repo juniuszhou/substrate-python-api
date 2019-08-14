@@ -3,12 +3,11 @@ import websockets
 import json
 
 from substrate_python_api.utils.blake2 import get_blake2_256
-from substrate_python_api.utils.codec import encode_compact_integer
+from substrate_python_api.utils.codec import encode_u64_bytes
 
 
 def send_hash():
-    index = encode_compact_integer(0)
-    index = index * 8
+    index = encode_u64_bytes(0)
     data = b'LitentryStorage AuthorizedTokensArray' + index
     print(get_blake2_256(data))
 

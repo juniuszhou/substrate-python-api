@@ -1,10 +1,8 @@
-from ethereum.utils import decode_hex, encode_hex
-import codecs
+from substrate_python_api.utils.codec import decode_compact_integer
 
 # hex from integer to hex string.
-SEPARATE = hex(255)
-
-print(codecs.decode('abcd', "hex"))
+SEPARATE = bytes([255])
+print(SEPARATE)
 
 
 def extrinsic_to_bytes():  # fix length 134 + flexible.

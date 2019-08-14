@@ -3,7 +3,6 @@ import websockets
 import json
 
 from substrate_python_api.utils.blake2 import get_blake2_256
-from substrate_python_api.utils.codec import encode_compact_integer
 
 
 def send_hash():

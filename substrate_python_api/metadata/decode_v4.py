@@ -3,14 +3,13 @@ from substrate_python_api.metadata.V5 import get_storage_v5, get_call_v5, get_ev
 from substrate_python_api.metadata.metadata_types import ModuleV5
 
 
-def decode_v5(data):
+def decode_v4(data):
 
     module_len, data = decode_compact_integer(data)
     print('mLen is {}'.format(module_len))
 
     for moduleIndex in range(0, module_len):
         mv = ModuleV5()
-
         name_len, data = decode_compact_integer(data)
         name, data = data[:name_len*2], data[name_len*2:]
         print('module name is {}, len is {}'.format(bytearray.fromhex(name).decode(), name_len))

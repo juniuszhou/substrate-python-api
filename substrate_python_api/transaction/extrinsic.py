@@ -1,9 +1,9 @@
-from sr25519.sr25519 import SR25519_PUBLIC_SIZE, SR25519_SIGNATURE_SIZE
-from tests.config import async_call
+from substrate_python_api.sr25519.sr25519 import SR25519_PUBLIC_SIZE, SR25519_SIGNATURE_SIZE
+from substrate_python_api.tests.config import async_call
 import json
-from utils.blake2 import get_blake2_256
+from substrate_python_api.utils.blake2 import get_blake2_256
 import base58
-from utils.codec import encode_compact_integer
+from substrate_python_api.utils.codec import encode_compact_integer
 
 balances_module_index = 5
 transfer_method_index = 0
