@@ -1,5 +1,5 @@
-from utils.codec import decode_compact_integer, next_byte, hex_to_string
-from metadata.metadata_types import ConstV7
+from substrate_python_api.utils.codec import decode_compact_integer, next_byte, hex_to_string
+from substrate_python_api.metadata.metadata_types import ConstV7
 
 
 def get_const_v7(data):

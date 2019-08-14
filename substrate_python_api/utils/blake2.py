@@ -13,4 +13,3 @@ def get_blake2_256(data):
 def test():
     print(get_blake2_256(b'abc'))
 
-

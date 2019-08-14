@@ -2,12 +2,12 @@ import xxhash
 
 
 # data like b'Sudo Key'
-def get_hash_128(data):
+def get_xxhash_128(data):
     x = xxhash.xxh64(seed=0)
     x.update(data)
     high = x.digest()
     x = xxhash.xxh64(seed=1)
-    x.update(b"Sudo Key")
+    x.update(data)
     low = x.digest()
     a = bytearray(low + high)
     a.reverse()

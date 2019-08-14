@@ -3,7 +3,7 @@ import websockets
 import json
 
 ws_uri = 'ws://192.168.2.158:9944/'
-
+# ws_uri = 'ws://127.0.0.1:9944/'
 
 def async_call(command, params=[], callback=None):
     async def hello(uri):

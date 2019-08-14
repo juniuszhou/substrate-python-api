@@ -1,6 +1,6 @@
-from metadata.common_algo import next_byte, decode_compact_integer, hex_to_string
-from metadata.V5 import get_storage_v5, get_call_v5, get_event_v5
-from metadata.metadata_types import ModuleV5
+from substrate_python_api.metadata.common_algo import next_byte, decode_compact_integer, hex_to_string
+from substrate_python_api.metadata.V5 import get_storage_v5, get_call_v5, get_event_v5
+from substrate_python_api.metadata.metadata_types import ModuleV5
 
 
 def decode_v5(data):

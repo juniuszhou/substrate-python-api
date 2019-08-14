@@ -1,7 +1,7 @@
-from utils.codec import next_byte, decode_compact_integer, hex_to_string
-from metadata.V5 import get_storage_v5, get_call_v5, get_event_v5
-from metadata.V6 import get_const_v6
-from metadata.metadata_types import ModuleV6
+from substrate_python_api.utils.codec import next_byte, decode_compact_integer, hex_to_string
+from substrate_python_api.metadata.V5 import get_storage_v5, get_call_v5, get_event_v5
+from substrate_python_api.metadata.V6 import get_const_v6
+from substrate_python_api.metadata.metadata_types import ModuleV6
 
 
 def decode_v6(data):

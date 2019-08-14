@@ -1,4 +1,4 @@
-from metadata.decode_v6 import decode_v6
+from substrate_python_api.metadata.decode_v6 import decode_v6
 
 
 def decode_metadata(data):

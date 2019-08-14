@@ -78,3 +78,14 @@ def decode_test():
     print(decode_compact_integer('3635c9adc5dea00000'))
 
 
+def encode_example():
+    hex_string = '123456'
+    bytes_array = bytearray.fromhex(hex_string)
+    u8_list = [x for x in bytes_array]
+
+    print(bytes_array)
+    print(u8_list)
+
+    print(bytearray.hex(bytes_array))
+    print(bytes(u8_list))
+
