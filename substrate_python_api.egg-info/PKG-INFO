@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: substrate-python-api
+Version: 0.0.1
+Summary: python api for substrate
+Home-page: https://github.com/juniuszhou/substrate-pyton-api
+Author: junius
+Author-email: junius.zhou@gmail.com
+License: MIT Licence
+Description: python api for substrate
+Keywords: pip,substrate,api
+Platform: any

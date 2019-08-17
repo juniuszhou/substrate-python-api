@@ -1,0 +1,6 @@
+README.md
+setup.py
+substrate_python_api.egg-info/PKG-INFO
+substrate_python_api.egg-info/SOURCES.txt
+substrate_python_api.egg-info/dependency_links.txt
+substrate_python_api.egg-info/top_level.txt
