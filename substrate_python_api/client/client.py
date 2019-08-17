@@ -4,7 +4,7 @@ import json
 import time
 
 
-class WSClient():
+class WSClient:
     subscriptions = dict()
     connection = None
     started = False

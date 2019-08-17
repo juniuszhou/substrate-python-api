@@ -11,5 +11,14 @@ def get_blake2_256(data):
 
 
 def test():
-    print(get_blake2_256(b'abc'))
+    key = b'LitentryStorage IdentitiesOwner'
+    params = '0x672576b52b8b52d2d8a9e6aafa06654d269b1f98b2598d7f3e6bc98fdd3790c7'
+    param_bytes = bytearray.fromhex(params[2:])
+    print(get_blake2_256(key + param_bytes))
 
+    key = b'LitentryStorage IdentitiesArray'
+    params = 1
+    param_bytes = bytearray.fromhex(params[2:])
+    print(get_blake2_256(key + param_bytes))
+
+# test()

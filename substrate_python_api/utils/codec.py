@@ -91,6 +91,22 @@ def encode_example():
 
 
 def encode_u64_bytes(data):
-    return data.to_bytes(8, 'big')
+    return data.to_bytes(8, 'little')
 
+
+def decode_transfer_extrinsic(bytes_array):
+    print('transfer extrinsic length is {}'.format(len(bytes_array)))
+    print('version is {}'.format([x for x in bytes_array[:1]]))
+    print('separate is {}'.format(bytes_array[1]))
+    print('sender is {}'.format([x for x in bytes_array[2:34]]))
+    print('signature is {}'.format([x for x in bytes_array[34:98]]))
+    print('extra is {}'.format([x for x in bytes_array[98:103]]))
+    print('separate is {}'.format(bytes_array[103]))
+    print('to is {}'.format([x for x in bytes_array[104:136]]))
+    print('amount is {}'.format([x for x in bytes_array[136:]]))
+    pass
+
+
+def decode_logs(data):
+    pass
 

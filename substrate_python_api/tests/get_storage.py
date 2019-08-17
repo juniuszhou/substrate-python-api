@@ -4,7 +4,7 @@ from substrate_python_api.tests.config import async_call
 message = {"jsonrpc": "2.0",
            "method": "state_getStorage",
            # key of storage.
-           "params": ["0x3f54a7d3730b866b50e6c1d2817d9ead3bcb7a693d04c3be6712bde3f17facca"],
+           "params": ["0xb87be889f43fdcf49af3d74b74646da1905a4e53f0ceb97476a6539bfe60d588"],
            "id": 1}
 
 

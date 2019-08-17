@@ -3,13 +3,12 @@ import websockets
 import json
 
 from substrate_python_api.utils.blake2 import get_blake2_256
-from substrate_python_api.utils.codec import encode_u64_bytes
 
 
 def send_hash():
-    index = encode_u64_bytes(1)
-    print(index)
-    data = b'LitentryStorage IdentitiesArray' + index
+    identity = '0x6cc0b3a302de9d84c17a3be3a96ac40efc2ee7834feb770a65fba09e256d768e'
+    identity_hash = bytearray.fromhex(identity[2:])
+    data = b'LitentryStorage AuthorizedTokens' + identity_hash
     print(get_blake2_256(data))
 
     message = {"jsonrpc": "2.0",
@@ -18,7 +17,17 @@ def send_hash():
                "id": 1}
 
     def deal_with_message(data):
-        print(data)
+        result = json.loads(data)['result']
+        result_bytes = bytearray.fromhex(result[2:])
+
+        token_hash = result_bytes[:32]
+        cost_128 = int.from_bytes(result_bytes[32:48], 'little')
+        data = int.from_bytes(result_bytes[48:56], 'little')
+        datatype = int.from_bytes(result_bytes[56:64], 'little')
+        expired = int.from_bytes(result_bytes[64:], 'little')
+
+        print(token_hash)
+        print(cost_128, data, datatype, expired)
 
     def async_call(message):
         async def hello(uri):
