@@ -1,5 +1,5 @@
 from substrate_python_api.utils.codec import decode_compact_integer, next_byte, hex_to_string
-from substrate_python_api.metadata.metadata_types import StorageV5, EventArgV5, FuncTypeV5, CallV5, FunctionCallArgV5
+from substrate_python_api.metadata.V5_types import StorageV5, EventArgV5, FuncTypeV5, CallV5, FunctionCallArgV5
 
 
 def get_storage_v5(data):

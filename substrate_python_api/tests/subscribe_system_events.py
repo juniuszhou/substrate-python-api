@@ -1,9 +1,6 @@
-
 from substrate_python_api.tests.config import async_subscribe
 import json
-from substrate_python_api.utils.blake2 import get_blake2_256
 from substrate_python_api.utils.xxHash import get_xxhash_128
-import base58
 
 
 class Keep:
@@ -21,13 +18,12 @@ def callback(data):
         Keep.skip_first = True
 
 
-balance = b'System EventCount'
+events = b'System Events'
 
-print(get_xxhash_128(balance))
+print(get_xxhash_128(events))
 method = 'state_subscribeStorage'
-params = [(get_blake2_256(balance),)]
+params = [(get_xxhash_128(events),)]
 
 
-async_subscribe(method, params, callback)
-
+async_subscribe(method, params, callback, debug=True)
 

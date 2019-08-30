@@ -1,7 +1,7 @@
 from substrate_python_api.utils.codec import next_byte, decode_compact_integer
-from substrate_python_api.metadata.V5 import get_storage_v5, get_call_v5, get_event_v5
-from substrate_python_api.metadata.V6 import get_const_v6
-from substrate_python_api.metadata.metadata_types import ModuleV6
+from substrate_python_api.metadata.V7_types import ModuleV7
+
+from substrate_python_api.metadata.V7 import get_storage_v7, get_call_v7, get_event_v7, get_const_v7
 
 
 def decode_v7(data):
@@ -9,7 +9,7 @@ def decode_v7(data):
     print('module length is {}'.format(module_len))
 
     for moduleIndex in range(0, module_len):
-        mv = ModuleV6()
+        mv = ModuleV7()
         mv.index = moduleIndex
 
         name_len, data = decode_compact_integer(data)
@@ -25,7 +25,7 @@ def decode_v7(data):
 
             storage_len, data = decode_compact_integer(data)
             for i in range(0, storage_len):
-                storage, data = get_storage_v5(data)
+                storage, data = get_storage_v7(data)
                 print('>>>> storage {}'.format(storage.name))
 
                 mv.storage.append(storage)
@@ -34,7 +34,7 @@ def decode_v7(data):
         if call_is_set != 0:
             call_len, data = decode_compact_integer(data)
             for i in range(0, call_len):
-                call, data = get_call_v5(data)
+                call, data = get_call_v7(data)
                 call.index = i
                 print('>>>> call {} index is {}'.format(call.name, i))
                 mv.call.append(call)
@@ -43,13 +43,13 @@ def decode_v7(data):
         if event_is_set != 0:
             event_len, data = decode_compact_integer(data)
             for i in range(0, event_len):
-                event, data = get_event_v5(data)
+                event, data = get_event_v7(data)
                 print('>>>> event {}'.format(event.name))
                 mv.event.append(event)
 
         const_len, data = decode_compact_integer(data)
         for i in range(0, const_len):
-            const, data = get_const_v6(data)
+            const, data = get_const_v7(data)
             print('>>>> event {}'.format(const.name))
             mv.event.append(const)
 

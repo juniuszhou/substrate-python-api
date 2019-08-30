@@ -2,7 +2,7 @@ import asyncio
 import websockets
 import json
 
-ws_uri = 'ws://192.168.1.224:9944'
+ws_uri = 'ws://192.168.2.158:9944'
 
 
 async def get_connection():

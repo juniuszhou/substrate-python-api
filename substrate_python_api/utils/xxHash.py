@@ -24,9 +24,7 @@ def test():
     x.update(b"Sudo Key")
     print(x.hexdigest())  # 64 bits 8 bytes
 
-    x = xxhash.xxh64(seed=0)
-    x.update(b'abc')
-    print(x.hexdigest())  # 64 bits 8 bytes
+    print(get_xxhash_128(b'System Events'))
 
 
-
+test()

@@ -1,5 +1,5 @@
 from substrate_python_api.utils.codec import decode_compact_integer, next_byte, hex_to_string
-from substrate_python_api.metadata.metadata_types import ConstV6
+from substrate_python_api.metadata.V6_types import ConstV6
 
 
 def get_const_v6(data):

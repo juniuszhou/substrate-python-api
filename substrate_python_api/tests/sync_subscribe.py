@@ -4,10 +4,10 @@ import json
 import multiprocessing
 import time
 
-# ws_uri = 'ws://192.168.2.158:9944'
+ws_uri = 'ws://192.168.2.158:9944'
 
 def get_data():
-    ws_uri = 'ws://47.254.169.60:9944'
+    # ws_uri = 'ws://47.254.169.60:9944'
     conn = websocket.create_connection(ws_uri)
 
     message = dict()

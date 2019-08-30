@@ -16,6 +16,7 @@ def send_hash():
                "method": "state_getStorage",
                # "params": ["0x7f864e18e3dd8b58386310d2fe0919eef27c6e558564b7f67f22d99d20f587bb"],
                "params": [get_xxhash_128('Sudo Key')],
+               # "params": [get_xxhash_128('System Events')],
                # "params": [get_hash_128('LitentryStorage IdentitiesCount')],
                "id": 1}
 

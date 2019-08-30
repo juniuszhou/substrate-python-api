@@ -26,3 +26,11 @@ def decode_metadata(data):
     elif version == 7:
         decode_v7(data[10:])
 
+
+def test():
+    # test data from metadata in file.
+
+    pass
+
+
+

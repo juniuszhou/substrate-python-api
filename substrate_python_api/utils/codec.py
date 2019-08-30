@@ -1,3 +1,5 @@
+import base58
+
 # get the first byte as int from hex string.
 def next_byte(data):
     a = int(data[0], 16) * 16 + int(data[1], 16)
@@ -105,6 +107,12 @@ def decode_transfer_extrinsic(bytes_array):
     print('to is {}'.format([x for x in bytes_array[104:136]]))
     print('amount is {}'.format([x for x in bytes_array[136:]]))
     pass
+
+
+# address to public key bytes array.
+def address_to_public_key(address):
+    result = base58.b58decode(address)
+    return result[1:33]
 
 
 def decode_logs(data):
