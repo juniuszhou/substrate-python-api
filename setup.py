@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="substrate-python-api",
-    version="0.0.1",
+    version="0.0.2",
     keywords=("pip", "substrate", "api"),
     description="python api for substrate",
     long_description="python api for substrate",

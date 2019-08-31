@@ -15,8 +15,12 @@ git clone https://github.com/juniuszhou/subtrate-python-api
 python install setup.py
 
 ## Document
+https://github.com/juniuszhou/substrate-python-api/wiki
 
 ## Example
+from substrate_python_api.client.client import WSClient
+client = WSClient(uri='ws://192.168.2.158:9944')
+print(client.system_version())
 
 ## Contacts
 junius.zhou@gmail.com

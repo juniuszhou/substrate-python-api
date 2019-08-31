@@ -1,0 +1,11 @@
+# how to make lib and upload to pypi.
+
+# install dependent software
+python3 -m pip install --user --upgrade setuptools wheel
+pip install twine
+
+# make package
+python3 setup.py sdist bdist_wheel
+# upload to pypi.
+twine upload dist/*
+
