@@ -1,7 +1,7 @@
-from substrate_python_api.tests.config import async_subscribe
+from substrate_python_api.tests.config import async_subscribe, backend_sub
 import json
 from substrate_python_api.utils.xxHash import get_xxhash_128
-
+import time
 
 class Keep:
     skip_first = False
@@ -25,5 +25,15 @@ method = 'state_subscribeStorage'
 params = [(get_xxhash_128(events),)]
 
 
-async_subscribe(method, params, callback, debug=True)
+t = backend_sub(method, params, callback, debug=False)
+
+print('over')
+
+time.sleep(10)
+
+print('over again')
+
+t.stop()
+
+
 

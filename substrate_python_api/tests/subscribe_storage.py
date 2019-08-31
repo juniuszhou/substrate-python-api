@@ -32,3 +32,4 @@ params = [(get_blake2_256(balance),)]
 async_subscribe(method, params, callback)
 
 
+print('over')

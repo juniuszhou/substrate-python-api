@@ -1,8 +1,16 @@
-import asyncio
+
 from websocket import create_connection
-import websockets
 import json
 import time
+import threading
+
+subscribe_methods = [
+    '',
+]
+
+rpc_methods = [
+    '',
+]
 
 
 class WSClient:
@@ -14,57 +22,58 @@ class WSClient:
         self.uri = uri
         self.id = 0
         self.connection = create_connection(uri)
-        self.loop = asyncio.get_event_loop()
-        self.loop.run_until_complete(self.handle())
-        self.loop.run_until_forever()
+        self.task = threading.Thread(target=self.handle)
+        self.task.start()
+        self.sub_id = None
+        self.exit = False
 
-    async def handle(self):
-        while True:
+    def handle(self):
+        print('handle')
+        while not self.exit:
+            print('into while true')
             result = self.connection.recv()
+            data = json.loads(result)
+            if data.get('result'):
+                self.sub_id = data['result']
+                print('sub id is {}'.format(self.sub_id))
             print(result)
 
-    def async_call(self, command, params=[], callback=None, debug=False):
-        async def hello(uri):
-            async with websockets.connect(uri) as websocket:
-                message = dict()
-                message["jsonrpc"] = "2.0"
-                message["id"] = 1
-                message["params"] = params
-                message["method"] = command
-                if debug:
-                    print('Send: >>>> {}'.format(json.dumps(message, indent=4)))
-                await websocket.send(json.dumps(message))
-                data = await websocket.recv()
-                if debug:
-                    print('Receive: <<<< {}'.format(json.dumps(json.loads(data), indent=4)))
-                if callback is not None:
-                    callback(data)
+    def subscribe(self, sub):
+        message = dict()
+        message["jsonrpc"] = "2.0"
+        message["id"] = 1
+        message["params"] = []
+        message["method"] = sub
+        print('send sub message')
+        self.connection.send(json.dumps(message))
 
-        asyncio.get_event_loop().run_until_complete(hello(self.uri))
+    def stop(self):
+        self.exit = True
+        message = dict()
+        message["jsonrpc"] = "2.0"
+        message["id"] = 2
+        sub_list = list()
+        sub_list.append(self.sub_id)
+        message["params"] = sub_list
+        message["method"] = 'chain_unsubscribeNewHead'
+        print('send sub message {}'.format(json.dumps(message)))
+        self.connection.send(json.dumps(message))
+        # self.connection.close()
+        self.task.join()
 
-    def async_subscribe(self, method, params=[], callback=None, debug=False):
-        async def hello(uri):
-            async with websockets.connect(uri) as websocket:
-                message = dict()
-                message["jsonrpc"] = "2.0"
-                message["id"] = 1
-                message["params"] = params
-                message["method"] = method
-                if debug:
-                    print('Send: >>>> {}'.format(json.dumps(message, indent=4)))
-                await websocket.send(json.dumps(message))
-                while True:
-                    data = await websocket.recv()
-                    if debug:
-                        print('Receive: <<<< {}'.format(json.dumps(json.loads(data), indent=4)))
-                    callback(data)
-
-        asyncio.get_event_loop().run_until_complete(hello(self.uri))
+    def system_version(self):
+        pass
 
 
 client = WSClient("ws://192.168.2.158:9944")
-client.subscribe('a')
-
-time.sleep(10000)
+print('start client')
+client.subscribe('chain_subscribeNewHead')
+time.sleep(1)
+client.subscribe('chain_subscribeFinalizedHeads')
+time.sleep(1)
+client.subscribe('chain_subscribeNewHead')
+time.sleep(10)
+print('stop client')
+client.stop()
 
 
