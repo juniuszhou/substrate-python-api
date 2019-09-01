@@ -7,5 +7,6 @@ websocket-client
 base58
 codecs
 mnemonic
+schnorrpy
 
 

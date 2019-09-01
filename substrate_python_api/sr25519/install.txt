@@ -26,4 +26,5 @@ junius@Jun:$ pwd
 /home/junius/code/src/github.com/juniuszhou/sr25519-crust/build/release
 
 
-
+# https://ed25519.herokuapp.com/ online 25519 generation and signature
+# https://gitlab.com/kauriid/schnorrpy/ project for python wrapper for 25519.

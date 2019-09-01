@@ -12,4 +12,3 @@ https://www.shawntabrizi.com/substrate/querying-substrate-storage-via-rpc/
 
 https://github.com/shawntabrizi/substrate-rpc-examples
 
-

@@ -15,11 +15,31 @@ class PublicKey:
     def to_hex(self):
         return self.bytes_value.hex()
 
+    def to_base58(self):
+        return base58.b58encode(self.bytes_value)
+
+    def to_substrate(self):
+        return base58.b58encode(b'*' + codecs.decode(self.to_hex(), 'hex') + b'>\xa5')
+
 
 class PrivateKey:
     def __init__(self, bytes_value):
         if len(bytes_value) != 32:
             raise Exception('wrong length of private key')
+        self.bytes_value = bytes_value
+
+    def to_hex(self):
+        return self.bytes_value.hex()
+
+    def to_base58(self):
+        return base58.b58encode(self.bytes_value)
+
+
+class Nonce:
+    def __init__(self, bytes_value):
+        print('length of nonce is {}'.format(len(bytes_value)))
+        if len(bytes_value) != 32:
+            raise Exception('wrong length of nonce')
         self.bytes_value = bytes_value
 
     def to_hex(self):
@@ -55,8 +75,6 @@ def address_to_public(address):
     print(result[1:33])
 
 
-address_to_public(1)
-
 # nani-3:substrate junius$ target/release/subkey generate
 # Secret phrase `twenty warrior visit sword rose rely peace cash absent safe roof budget` is account:
 #   Secret seed: 0xf524574cf9425c882105e2c04f9ba7c24d4527b1dec8f2a689f276d7c56cecc6
@@ -64,14 +82,14 @@ address_to_public(1)
 #   Address (SS58): 5Hmg8FcLs8BntiybzUqhggd2B6JLF7BbXQsHMvxv8RroRXS4
 
 
-test_base58()
-print(public_to_address('0xfc6c6696498ebf3df05cce70f2b66bca260603d25db68bccc08e11b69d76d012'))
-
-key = PublicKey(b'\0' * 32)
-print(key.to_hex())
-
-
-key = PrivateKey(b'\0' * 32)
-print(key.to_hex())
+# test_base58()
+# print(public_to_address('0xfc6c6696498ebf3df05cce70f2b66bca260603d25db68bccc08e11b69d76d012'))
+#
+# key = PublicKey(b'\0' * 32)
+# print(key.to_hex())
+#
+#
+# key = PrivateKey(b'\0' * 32)
+# print(key.to_hex())
 
 

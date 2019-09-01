@@ -1,6 +1,6 @@
 from ctypes import *
 import ctypes
-from .types import PrivateKey, PublicKey, Address
+from .types import PrivateKey, PublicKey, Nonce, Address
 
 so_path = '/home/junius/code/src/github.com/juniuszhou/sr25519-crust/build/release/libsr25519crust.so'
 
@@ -63,7 +63,8 @@ class Sr25519:
         output = ctypes.c_char_p()
         output.value = b'0' * SR25519_KEYPAIR_SIZE
         self.lib.sr25519_keypair_from_seed(output, seed)
-        return PrivateKey(output.value[:32]), PublicKey(output.value[:64])
+        print('out put is {}, len is {}'.format(output.value, len(output.value)))
+        return PrivateKey(output.value[:32]), Nonce(output.value[32:64]), PublicKey(output.value[64:])
 
     # /**
     #  * Sign a message
