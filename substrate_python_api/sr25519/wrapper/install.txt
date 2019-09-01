@@ -1,0 +1,31 @@
+# sr25519 lib c binding.
+git clone https://github.com/Warchant/sr25519-crust
+
+1. Install rust compiler (nightly), cargo:
+
+curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain nightly
+source $HOME/.cargo/env
+rustup install nightly
+rustup default nightly
+
+2. cd sr25519-crust && mkdir build && cd build
+
+3. cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=TRUE
+
+4. cd .. # not needed in ubuntu. cmake generate make file in different folder for ubuntu and mac
+
+5. sudo make install
+
+-- Installing: /usr/local/include/include/sr25519/sr25519.h
+-- Installing: /usr/local/lib/libsr25519crust.a
+-- Installing: /usr/local/lib/libsr25519crust.dylib
+
+junius@Jun:$ ls -l libsr25519crust.so
+-rwxrwxr-x 2 junius junius 2788192 7月  25 17:57 libsr25519crust.so
+junius@Jun:$ pwd
+/home/junius/code/src/github.com/juniuszhou/sr25519-crust/build/release
+
+
+# https://ed25519.herokuapp.com/ online 25519 generation and signature
+# https://gitlab.com/kauriid/schnorrpy/ project for python wrapper for 25519.
+# https://github.com/pyca/pynacl ed25519 project.
