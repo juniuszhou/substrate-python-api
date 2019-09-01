@@ -3,14 +3,13 @@ from websocket import create_connection
 import json
 import time
 import threading
+from substrate_python_api.metadata.get_metadata import sync_call
 
-subscribe_methods = [
-    '',
-]
 
-rpc_methods = [
-    '',
-]
+subscribe_unsubscribe_map = {
+    'chain_subscribeNewHead': 'chain_unsubscribeNewHead',
+    'chain_subscribeFinalizedHeads': 'chain_unsubscribeFinalizedHeads',
+}
 
 
 class WSClient:
@@ -25,6 +24,7 @@ class WSClient:
         self.exit = False
         self.task = None
         self.debug = debug
+        self.metadata = sync_call(self.uri)
 
     def start_bak(self):
         self.connection = create_connection(self.uri)
@@ -42,7 +42,7 @@ class WSClient:
                 print('sub id is {}'.format(self.sub_id))
             print(result)
 
-    def subscribe(self, sub):
+    def _subscribe(self, sub):
         message = dict()
         message["jsonrpc"] = "2.0"
         message["id"] = 1
@@ -51,8 +51,7 @@ class WSClient:
         print('send sub message')
         self.connection.send(json.dumps(message))
 
-    def stop(self):
-        self.exit = True
+    def _unsubscribe(self):
         message = dict()
         message["jsonrpc"] = "2.0"
         message["id"] = 2
@@ -62,6 +61,13 @@ class WSClient:
         message["method"] = 'chain_unsubscribeNewHead'
         print('send sub message {}'.format(json.dumps(message)))
         self.connection.send(json.dumps(message))
+
+    def _unsubscribe_all(self):
+        self._unsubscribe()
+
+    def stop(self):
+        self.exit = True
+
         # self.connection.close()
         self.task.join()
 
@@ -107,15 +113,16 @@ class WSClient:
         return data['result']
 
 
-# client = WSClient("ws://192.168.2.158:9944")
-# print('start client')
-# client.subscribe('chain_subscribeNewHead')
-# time.sleep(1)
-# client.subscribe('chain_subscribeFinalizedHeads')
-# time.sleep(1)
-# client.subscribe('chain_subscribeNewHead')
-# time.sleep(10)
-# print('stop client')
-# client.stop()
+def test():
+    client = WSClient("ws://192.168.2.158:9944")
+    print('start client')
+    client.subscribe('chain_subscribeNewHead')
+    time.sleep(1)
+    client.subscribe('chain_subscribeFinalizedHeads')
+    time.sleep(1)
+    client.subscribe('chain_subscribeNewHead')
+    time.sleep(10)
+    print('stop client')
+    client.stop()
 
 

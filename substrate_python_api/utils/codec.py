@@ -1,5 +1,6 @@
 import base58
 
+
 # get the first byte as int from hex string.
 def next_byte(data):
     a = int(data[0], 16) * 16 + int(data[1], 16)
@@ -12,6 +13,10 @@ def int_to_byte(number):
 
 def hex_to_string(hex_data):
     return bytearray.fromhex(hex_data).decode()
+
+
+def string_to_hex():
+    return b'data'.hex()
 
 
 def decode_compact_integer(data):
@@ -72,7 +77,7 @@ def encode_compact_integer(number):
 def encode_test():
     print(encode_compact_integer(60))
     print(encode_compact_integer(1024))
-    print(encode_compact_integer(1024*256))
+    print(encode_compact_integer(1024 * 256))
     print(encode_compact_integer(1024 * 256 * 256 * 256))
 
 
@@ -117,4 +122,3 @@ def address_to_public_key(address):
 
 def decode_logs(data):
     pass
-

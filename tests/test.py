@@ -15,3 +15,7 @@ def test_system():
 
 test_system()
 
+
+def test_state():
+    pass
+

@@ -1,12 +1,14 @@
 from substrate_python_api.utils.codec import next_byte, decode_compact_integer
 from substrate_python_api.metadata.V7_types import ModuleV7
-
 from substrate_python_api.metadata.V7 import get_storage_v7, get_call_v7, get_event_v7, get_const_v7
+from substrate_python_api.metadata.metadata_types import Metadata
 
 
 def decode_v7(data):
     module_len, data = decode_compact_integer(data)
     print('module length is {}'.format(module_len))
+    metadata = Metadata()
+    metadata.set_version(7)
 
     for moduleIndex in range(0, module_len):
         mv = ModuleV7()
@@ -53,6 +55,8 @@ def decode_v7(data):
             print('>>>> event {}'.format(const.name))
             mv.event.append(const)
 
+        metadata.module.append(mv)
 
+    return metadata
 
 

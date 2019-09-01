@@ -46,17 +46,7 @@ class ModuleV7:
         self.storage = []  # StorageV7
         self.call = []  # CallV7
         self.event = []  # EventArgV7
-
-
-class ModuleV7:
-    def __init__(self):
-        self.index = 0
-        self.name = ''
-        self.prefix = ''
-        self.storage = []  # StorageV7
-        self.call = []  # CallV7
-        self.event = []  # EventArgV7
-        self.const = []
+        self.const = []  # ConstV7
 
 
 class ConstV7:
@@ -67,14 +57,4 @@ class ConstV7:
         self.doc = []  # string
 
 
-class ConstV7:
-    def __init__(self):
-        self.name = ''
-        self.type = ''  # FunctionCallArgV7
-        self.value = ''
-        self.doc = []  # string
 
-
-class MetadataV7:
-    def __init__(self):
-        self.module = []  # ModuleV7
