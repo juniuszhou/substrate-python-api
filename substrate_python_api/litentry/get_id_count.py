@@ -22,9 +22,11 @@ def send_hash():
                 data = await websocket.recv()
                 deal_with_message(data)
 
-        asyncio.get_event_loop().run_until_complete(hello('ws://192.168.2.158:9944/'))
+        # asyncio.get_event_loop().run_until_complete(hello('ws://112.125.25.18:9944/'))
+        asyncio.get_event_loop().run_until_complete(hello('ws://192.168.2.157:9944/'))
 
     async_call(message)
 
 
 send_hash()
+

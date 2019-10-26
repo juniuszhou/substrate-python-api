@@ -68,7 +68,9 @@ def test_sign():
                              b'64886c69d5a20e04ff66317c7e14d2580dedfc6bbff14c380569cad5c02719c'
                              b'420c'))
 
+
 test_sign()
+
 
 def test_verify_valid_signature():
     """Test that we can verify a valid signature"""
@@ -90,7 +92,10 @@ def test_verify_valid_signature():
         b'The conscious parts try to make sense of the reaching out.'
         b'Try to interpret it.')
     print(schnorrpy.verify(sig, message, publicKey))
+
+
 test_verify_valid_signature()
+
 
 def test_fail_verify_invalid_signature():
     """Test that a invalid signature will fail to verify"""
@@ -112,4 +117,3 @@ def test_fail_verify_invalid_signature():
         b'The conscious parts try to make sense of the reaching out.'
         b'Try to interpret it.')
     print(schnorrpy.verify(sig, message, publicKey))
-    

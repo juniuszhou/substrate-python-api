@@ -12,3 +12,5 @@ https://www.shawntabrizi.com/substrate/querying-substrate-storage-via-rpc/
 
 https://github.com/shawntabrizi/substrate-rpc-examples
 
+# py-scale-codec
+https://github.com/polkascan/py-scale-codec

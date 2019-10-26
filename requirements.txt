@@ -9,4 +9,3 @@ codecs
 mnemonic
 schnorrpy
 
-
