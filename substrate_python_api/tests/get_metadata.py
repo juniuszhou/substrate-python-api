@@ -2,7 +2,7 @@ import asyncio
 import websockets
 import json
 
-from substrate_python_api.metadata.decode import decode_metadata
+from substrate_python_api.metadata.decode import decode_metadata 
 
 ws_uri = 'ws://192.168.2.158:9944/'
 
