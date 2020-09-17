@@ -1,5 +1,7 @@
 from substrate_python_api.client.client import WSClient
 
+from /Users/junius/github/junius/substrate-python-api/substrate_python_api/tests
+
 client = WSClient(uri='ws://192.168.2.158:9944')
 
 
